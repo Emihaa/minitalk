@@ -6,7 +6,7 @@
 /*   By: ehaanpaa <ehaanpaa@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:11:32 by ehaanpaa          #+#    #+#             */
-/*   Updated: 2025/01/30 23:41:28 by ehaanpaa         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:29:02 by ehaanpaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void send_signal(char *s, int served_pid)
         else if (s[i] == '0')
             kill(served_pid, SIGUSR2);
         i++;
-        usleep(100);
+        usleep(500);
     }
 }
 
@@ -52,15 +52,31 @@ static void binary_convert(int value, int server_pid)
     send_signal(s, server_pid);
 }
 
+// static void send_signal2(char c, int served_pid)
+// {
+//     int i = 0; 
+//     while (i < 8)
+//     {
+//         if (s[i] == '1')
+//             kill(served_pid, SIGUSR1);
+//         else if (s[i] == '0')
+//             kill(served_pid, SIGUSR2);
+//         i++;
+//         usleep(500);
+//     }
+// }
+
 static void ascii_convert(char *s, int server_pid)
 {
     int i = 0;
     int ascii = 0;
+    char c = 0;
     
     while (s[i] != '\0')
     {
         ascii = s[i];
-        
+        c = s[i];
+        // send_signal2(c, server_pid);
         binary_convert(ascii, server_pid);
         i++;
     }

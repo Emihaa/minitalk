@@ -6,7 +6,7 @@
 /*   By: ehaanpaa <ehaanpaa@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:38:06 by ehaanpaa          #+#    #+#             */
-/*   Updated: 2025/01/30 23:40:24 by ehaanpaa         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:35:47 by ehaanpaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void signal_handler(int signal)
 {
     static char c = 0;
     static int i = 7;
-    static char buffer[4000];
+    static char buffer[100000];
     static int j = 0;
     
     if (signal == SIGUSR1)
@@ -44,7 +44,9 @@ int main (void)
     struct sigaction sa;
     
     sa.sa_handler = &signal_handler;
-        
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    
     sigaction(SIGUSR1, &sa, NULL);
     sigaction(SIGUSR2, &sa, NULL);
 
