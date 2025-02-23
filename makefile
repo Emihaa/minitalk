@@ -17,8 +17,8 @@ all: $(LIBFT)/libft.a $(NAME_CLIENT) $(NAME_SERVER)
 $(LIBFT)/libft.a:
 	@make -C $(LIBFT)
 
-%.o: %.c client.h
-	@$(CC) $(CFLAGS) -o $@ -C $<
+%.o: %.c 
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 $(NAME_CLIENT): $(OBJ_CLIENT)
 	@$(CC) $(CFLAGS) $(OBJ_CLIENT) $(LIBS) -o $(NAME_CLIENT)
